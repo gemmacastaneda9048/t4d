@@ -1,5 +1,5 @@
 // Make connection
-var socket = io.connect('http://localhost:7000');
+var socket = io.connect('https://t4d.onrender.com');
 
 // Query DOM
 var message = document.getElementById('message'),
