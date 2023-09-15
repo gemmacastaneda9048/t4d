@@ -2,31 +2,31 @@
 var socket = io.connect('https://t4d.onrender.com');
 
 // Query DOM
-var message = document.getElementById('message'),
-      handle = document.getElementById('handle'),
-      btn = document.getElementById('send'),
+var mensaje = document.getElementById('mensaje'),
+      usuario = document.getElementById('usuario'),
+      btn = document.getElementById('enviar'),
       output = document.getElementById('output'),
       feedback = document.getElementById('feedback');
 
 // Emit events
 btn.addEventListener('click', function(){
     socket.emit('chat', {
-        message: message.value,
-        handle: handle.value
+        mensaje: mensaje.value,
+        usuario: usuario.value
     });
-    message.value = "";
+    mensaje.value = "";
 });
 
-message.addEventListener('keypress', function(){
-    socket.emit('typing', handle.value);
+mensaje.addEventListener('keypress', function(){
+    socket.emit('typing', usuario.value);
 })
 
 // Listen for events
 socket.on('chat', function(data){
     feedback.innerHTML = '';
-    output.innerHTML += '<p><strong>' + data.handle + ': </strong>' + data.message + '</p>';
+    output.innerHTML += '<p><strong>' + data.usuario + ': </strong>' + data.mensaje + '</p>';
 });
 
 socket.on('typing', function(data){
-    feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
+    feedback.innerHTML = '<p><em>' + data + ' is typing a mensaje...</em></p>';
 });
